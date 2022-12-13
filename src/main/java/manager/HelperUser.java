@@ -20,7 +20,7 @@ public class HelperUser extends HelperBase{
     }
 
     public void clickOkButton(){
-        click(By.xpath("//button[text()='Ok']"));
+        click(By.xpath("//button[@type='button']"));
 
     }
 
@@ -64,7 +64,7 @@ public class HelperUser extends HelperBase{
         openLoginForm();
         fillLoginForm(user);
         submitLogin();
-        clickOkButton();
-        pause(5);
+//        clickOkButton();
+//        pause(5000);
     }
 }

@@ -15,7 +15,7 @@ public class AddNewCarTests extends TestBase {
                             .withEmail("asd@fgh.com")
                             .withPassword("$Asdf1234")
                     );
-            app.getUser().pause(10);
+            app.getUser().pause(3000);
             app.getUser().clickOkButton();
         }
     }
@@ -36,10 +36,12 @@ public class AddNewCarTests extends TestBase {
                 .price("150")
                 .build();
 
+        app.getUser().pause(3000);
         app.getCar().openCarForm();
-        Assert.assertTrue(app.getCar().isCarFormPresent());
-//        app.getCar().fillCarForm();
-//        app.getCar().submitForm();
+//        Assert.assertTrue(app.getCar().isCarFormPresent());
+        app.getUser().pause(3000);
+        app.getCar().fillCarForm(car);
+        app.getCar().submitForm();
 
     }
 
