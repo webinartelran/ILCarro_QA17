@@ -22,6 +22,8 @@ public class AddNewCarTests extends TestBase {
 
     @Test
     public void addNewCarPositive() {
+
+//        logger.info("Method addNewCarPositive started");
         int i = (int) ((System.currentTimeMillis() / 1000) % 3600);
 
         Car car = Car.builder()
@@ -42,6 +44,7 @@ public class AddNewCarTests extends TestBase {
         app.getUser().pause(3000);
         app.getCar().fillCarForm(car);
         app.getCar().submitForm();
+        logger.info("Car added with: \n" + car.toString());
 
     }
 

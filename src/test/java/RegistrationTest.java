@@ -1,8 +1,11 @@
 import models.User;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 public class RegistrationTest extends TestBase{
+
+
 
     @Test
     public void registrationPositiveTest(){
@@ -12,6 +15,9 @@ public class RegistrationTest extends TestBase{
                 .withLastName("Doe")
                 .withEmail("joe" + i + "@mail.com")
                 .withPassword("$Asdf1234");
+
+        logger.info("registrationPositiveTest with email: " + user.getEmail()
+        + " password: " + user.getPassword());
 
         app.getUser().openRegistrationForm();
         app.getUser().fillRegistrationForm(user);
