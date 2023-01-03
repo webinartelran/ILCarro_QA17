@@ -1,4 +1,5 @@
 import manager.NGListener;
+import manager.ProviderData;
 import models.User;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -15,7 +16,14 @@ public class LoginTest extends TestBase{
             app.getUser().logout();
         }
     }
-
+        // Data Transfer Object
+    @Test(dataProvider = "loginModelDto", dataProviderClass = ProviderData.class)
+    public void loginSuccessModel(User user){
+        logger.info("User: " + user.toString());
+        app.getUser().openLoginForm();
+        app.getUser().fillLoginForm(user);
+        app.getUser().submitLogin();
+    }
     @Test
     public void loginSuccess(){
         User data = new User()
