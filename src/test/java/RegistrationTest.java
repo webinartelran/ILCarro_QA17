@@ -5,8 +5,6 @@ import org.testng.annotations.Test;
 
 public class RegistrationTest extends TestBase{
 
-
-
     @Test
     public void registrationPositiveTest(){
         int i = (int) ((System.currentTimeMillis() / 1000) % 3600);
