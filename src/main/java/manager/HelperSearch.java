@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class HelperSearch extends HelperBase{
 
@@ -15,7 +16,8 @@ public class HelperSearch extends HelperBase{
         fillCity(city);
 //        selectPeriod(dateFrom, dateTo);
 //        selectPeriodYears(dateFrom, dateTo);
-        selectPeriodMonths(dateFrom, dateTo);
+//        selectPeriodMonths(dateFrom, dateTo);
+        selectPeriodYears(dateFrom, dateTo);
     }
 
     private void selectPeriodMonths(String dateFrom, String dateTo) {
@@ -48,8 +50,31 @@ public class HelperSearch extends HelperBase{
 
     private void selectPeriodYears(String dateFrom, String dateTo) {
 
+    LocalDate startDate = LocalDate.parse(dateFrom, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+    LocalDate endDate = LocalDate.parse(dateTo, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+    LocalDate nowDate = LocalDate.now();
+        String locatorStart = String.format("//div[.=' %s ']", startDate.getDayOfMonth());
+        String locatorEnd = String.format("//div[.=' %s ']", endDate.getDayOfMonth());
 
+        click(By.id("dates"));
+        //                    01.01.2024            10.01.2023
+        int startToEndMonth = startDate.getYear() - nowDate.getYear() == 0 ?
+                startDate.getMonthValue() - nowDate.getMonthValue() :
+                12 - nowDate.getMonthValue() + startDate.getMonthValue()
+                ;
+        for(int i = 0; i < startToEndMonth; i++){
+            click(By.xpath(("//button[@aria-label='Next month']")));
+        }
+        click(By.xpath(locatorStart));
 
+        startToEndMonth = endDate.getYear() - startDate.getYear() == 0 ?
+                endDate.getMonthValue() - startDate.getMonthValue() :
+                12 - startDate.getMonthValue() + endDate.getMonthValue()
+        ;
+        for(int i = 0; i < startToEndMonth; i++){
+            click(By.xpath(("//button[@aria-label='Next month']")));
+        }
+        click(By.xpath(locatorEnd));
 
     }
 
